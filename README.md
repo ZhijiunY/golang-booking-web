@@ -1,5 +1,5 @@
 ## golang booking web
-Built in Go version 1.19.3
-Uses the [chi] (https://github.com/go-chi/chi)router
-Uses [alex](https://github.com/alexedwards/scs) edwards scs session management
-Uses [nosurf] (https://github.com/justinas/nosurf)
+-Built in Go version 1.19.3
+-Uses the [chi] (https://github.com/go-chi/chi)router 
+-Uses [alex](https://github.com/alexedwards/scs) edwards scs session management
+-Uses [nosurf] (https://github.com/justinas/nosurf)
