@@ -1,1 +1,1 @@
-## golang simple web
+## golang booking web
