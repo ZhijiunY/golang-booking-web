@@ -31,6 +31,10 @@
 				color:red;
 
 			}
+			/* override styles here */
+			.notie-container {
+      			box-shadow: none;
+    		}
 
 		</style>
 
@@ -180,12 +184,14 @@
 	})();
 
 	document.getElementById("colorButton").addEventListener("click", function(){
-		let myEl = document.getElementById("myParagraph");
-		if (myEl.classList.contains("redText")){
-			myEl.classList.remove("redText");
-		}else{
-		myEl.classList.add("redText");
-		}
+		// let myEl = document.getElementById("myParagraph");
+		// if (myEl.classList.contains("redText")){
+		// 	myEl.classList.remove("redText");
+		// }else{
+		// myEl.classList.add("redText");
+		// }
+
+		 notify("This is my message", "warning");
 	})
 
 
@@ -197,26 +203,14 @@
 	}); 
 
 	// github.com/jaredreich/notie
-	function alertSuccess(msg){
+	function notify(msg, msgType){
 		notie.alert({
-			type: 'success', // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+			type: msgType, 
 			text: msg,
 		})
 	}
 
-	function alertError(msg){
-		notie.alert({
-			type: 'error', // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-			text: msg,
-		})
-	}
 
-	function alertWarning(msg){
-		notie.alert({
-			type: 'warning', // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-			text: msg,
-		})
-	}
 
 </script>
 
