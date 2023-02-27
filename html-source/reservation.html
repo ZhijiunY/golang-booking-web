@@ -44,7 +44,7 @@
 	<body>
 		<!--nav-->
 		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-			<a class="navbar-brand" href="#">Navbar</a>
+			<a class="navbar-brand" href="#">ZhijiunY</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -159,11 +159,13 @@
 
 <script src="https://unpkg.com/notie"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
 <script>
-	console.log("Hello");
-
+	let attention = Prompt();
 
 	(function() {
 		'use strict';
@@ -191,7 +193,10 @@
 		// myEl.classList.add("redText");
 		// }
 
-		 notify("This is my message", "warning");
+		// notify("This is my message", "warning");
+		// notifyModel("title", "<em>hello</em>", "success", "my text for the button");
+
+		attention.success();
 	})
 
 
@@ -210,7 +215,31 @@
 		})
 	}
 
+	// SweetAlert2
+	function notifyModel(title, text, icon, confirmButtonText){
+		Swal.fire({
+			title: title,
+			html: text,
+			icon: icon,
+			confirmButtonText: confirmButtonText,
+		})
+	}
 
+	// Prompt function
+	function Prompt(){
+		let toast = function(){
+			console.log("Prom and toast")
+		}
+
+		let success = function(){
+			console.log("Prom and toast")
+		}
+
+		return {
+			toast: toast,
+			success: success,
+		}
+	}
 
 </script>
 
