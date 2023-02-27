@@ -196,7 +196,7 @@
 		// notify("This is my message", "warning");
 		// notifyModel("title", "<em>hello</em>", "success", "my text for the button");
 
-		attention.success();
+		attention.success({msg:"水啦！", footer:"this is my message"});
 	})
 
 
@@ -227,17 +227,69 @@
 
 	// Prompt function
 	function Prompt(){
-		let toast = function(){
-			console.log("Prom and toast")
+		let toast = function(c){
+			const{
+				msg="",
+				icon="success",
+				position="top-end",
+			} = c;
+			// console.log("Prom and toast")
+
+			const Toast = Swal.mixin({
+				toast: true,
+				title:msg,
+				position: position,
+				icon:icon,
+				showConfirmButton: false,
+				timer: 3000, 
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
 		}
 
-		let success = function(){
-			console.log("Prom and toast")
+		
+})
+
+		Toast.fire({})
+	}
+
+		let success = function(c){
+
+			const{
+				msg = "",
+				title = "",
+				footer = "",
+			} = c;
+
+			Swal.fire({
+				icon: 'success',
+				title: title,
+				text: msg,
+				footer: footer,
+			 })
+		}
+
+		let error = function(c){
+
+			const{
+				msg = "",
+				title = "",
+				footer = "",
+			} = c;
+
+			Swal.fire({
+				icon: 'error ',
+				title: title,
+				text: msg,
+				footer: footer,
+			})
 		}
 
 		return {
 			toast: toast,
 			success: success,
+			error: error,
 		}
 	}
 
