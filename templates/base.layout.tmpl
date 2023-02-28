@@ -1,27 +1,301 @@
 {{define "base"}}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Web</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        
-        {{block "css" .}}
-        
-        {{end}}
+    <!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    </head>
-    <body>
+		<title> my nice page </title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+			  integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+			  crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/css/datepicker-bs5.min.css">
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+
+		<style>
+			.btn-outline-secondary {
+				color: darkgoldenrod;
+				border-color: #6c757d;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--nav-->
+		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+			<a class="navbar-brand" href="#">ZhijiunY</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+					</li>
+
+					<li class="nav-item">
+					<a class="nav-link" href="/about">About</a>
+					</li>
+
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Rooms</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/generals">General's Quarters</a>
+						<a class="dropdown-item" href="/majors">Major's Suite</a>
+					</div>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="/availability">Book Now</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/contact">Contact</a>
+					</li>
+					
+				</ul>
+			</div>
+		</nav>
         {{block "content" .}}
 
         {{end}}
+    
+<!--footer-->
+<div class="row my-footer">
+    <div class="col text-center">
+        left
+    </div>
 
-        {{block "js" .}}
+    <div class="col text-center">
+        Copyright © 2023 ZhijiunY. All rights reserved.
+    </div>
 
-        {{end}}
+    <div class="col text-center">
+        right
+    </div> 
+</div>
 
-    </body>
-    </html>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" 
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+		crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
+		crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" 
+		integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" 
+		crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/js/datepicker-full.min.js"></script>
+
+<script src="https://unpkg.com/notie"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{{block "js" .}}
+
+{{end}}
+
+
+<script>
+	let attention = Prompt();
+
+	(function() {
+		'use strict';
+		window.addEventListener('load', function() {
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			let forms = document.getElementsByClassName('needs-validation');
+			// Loop over them and prevent submission
+			Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+	})();
+
+	document.getElementById("colorButton").addEventListener("click", function(){
+
+		let html=`
+		<form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
+			<div class="form-row">
+				<div class="col">
+					<div class="form-row" id="reservation-dates-modal">
+						<div class="col">
+							<input disabled required class="form-control" id="start" name="start" type="text" placeholder="Arrival">
+						</div>
+
+						<div class="col">
+							<input disabled required class="form-control" id="end" name="end" type="text" placeholder="Departure">
+						</div>
+
+					</div>
+				</div>
+			</div>			
+		</form>
+		`
+
+		// let myEl = document.getElementById("myParagraph");
+		// if (myEl.classList.contains("redText")){
+		// 	myEl.classList.remove("redText");
+		// }else{
+		// myEl.classList.add("redText");
+		// }
+
+		// notify("This is my message", "warning");
+		// notifyModel("title", "<em>hello</em>", "success", "my text for the button");
+
+		attention.custom({msg: html,  title:" choose your dates"});
+	})
+
+
+	const elem = document.getElementById('reservation-dates');
+	const rangepicker = new DateRangePicker(elem, {
+
+	// ...options
+	format:"yyyy-mm-dd",
+	}); 
+
+	// github.com/jaredreich/notie
+	function notify(msg, msgType){
+		notie.alert({
+			type: msgType, 
+			text: msg,
+		})
+	}
+
+	// SweetAlert2
+	function notifyModel(title, text, icon, confirmButtonText){
+		Swal.fire({
+			title: title,
+			html: text,
+			icon: icon,
+			confirmButtonText: confirmButtonText,
+		})
+	}
+
+	function custom(c){
+
+	}
+
+	// Prompt function
+	function Prompt(){
+		let toast = function(c){
+			const{
+				msg="",
+				icon="success",
+				position="top-end",
+			} = c;
+			// console.log("Prom and toast")
+
+			const Toast = Swal.mixin({
+				toast: true,
+				title: msg,
+				position: position,
+				icon:icon,
+				showConfirmButton: false,
+				timer: 3000, 
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+		}
+
+})
+
+		Toast.fire({})
+	}
+
+		let success = function(c){
+
+			const{
+				msg = "",
+				title = "",
+				footer = "",
+			} = c;
+
+			Swal.fire({
+				icon: 'success',
+				title: title,
+				text: msg,
+				footer: footer,
+			 })
+		}
+
+		let error = function(c){
+
+			const{
+				msg = "",
+				title = "",
+				footer = "",
+			} = c;
+
+			Swal.fire({
+				icon: 'error ',
+				title: title,
+				text: msg,
+				footer: footer,
+			})
+		}
+
+		async function custom(c){
+		const{
+			msg = "",
+			title = "",
+		} = c;
+
+		const { value: formValues } = await Swal.fire({
+			title: title,
+			html: msg,
+			backdrop: false,
+			focusConfirm: false,
+			showCancelButton: true,
+			willOpen: () => { 
+				const elem = document.getElementById('reservation-dates-modal');
+				const rp = new DateRangePicker(elem, {
+					format: 'yyyy-mm-dd',
+					showOnFocus: true, 
+				})
+			},
+			preConfirm: () => {
+				return [
+					document.getElementById('start').value,
+					document.getElementById('end').value
+				]
+			},
+			didOpen: () => {				
+					document.getElementById('start').removeAttribute('disabled');
+					document.getElementById('end').removeAttribute('disabled');
+			}
+		})
+
+if (formValues) {
+  Swal.fire(JSON.stringify(formValues))
+}
+	}
+
+		return {
+			toast: toast,
+			success: success,
+			error: error,
+			custom: custom,
+		}
+	}
+
+	
+
+</script>
+
+	</body>
+
+</html>
 {{end}}
