@@ -3,3 +3,7 @@
 - Uses the [chi](https://github.com/go-chi/chi) router 
 - Uses [alex edwards scs](https://github.com/alexedwards/scs) session management
 - Uses [nosurf](https://github.com/justinas/nosurf) 
+- Uses [pat](https://github.com/bmizerany/pat)
+- Uses [notie](https://github.com/jaredreich/notie)
+- Uses [sweetalert2](https://sweetalert2.github.io)
+- See [Javascript Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
