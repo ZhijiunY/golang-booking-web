@@ -1,5 +1,77 @@
 {{template "base" .}}
 
 {{define "content"}}
-    
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <img src="/static/images/G-rooms.png" class="img-thumbnail rounded mx-auto d-block room-image" alt="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-4">Wecome to our <em>'Generals'</em> Rooms</h1>
+            <p class="text-center">
+                your home away from home. your home away from home. your home away from home. your home away from home. your home away from home. 
+                your home away from home. your home away from home. your home away from home. your home away from home. your home away from home. 
+                your home away from home. your home away from home. your home away from home. your home away from home. your home away from home. 
+                your home away from home. your home away from home. your home away from home. your home away from home. your home away from home. 
+                your home away from home. your home away from home. your home away from home. your home away from home. your home away from home. 
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col text-center">
+
+            <a id="check-availability-button" href="#!" class="btn btn-success">Check availability</a>
+
+        </div>
+    </div>
+
+
+
+</div>
+{{end}}
+
+{{define "js"}}
+
+    <script>
+        document.getElementById("check-availability-button").addEventListener("click", function() {
+
+        let html=`
+        <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-row" id="reservation-dates-modal">
+                        <div class="col">
+                            <input disabled required class="form-control" id="start" name="start" type="text" placeholder="Arrival">
+                        </div>
+
+                        <div class="col">
+                            <input disabled required class="form-control" id="end" name="end" type="text" placeholder="Departure">
+                        </div>
+
+                    </div>
+                </div>
+            </div>			
+        </form>
+        `
+
+        // let myEl = document.getElementById("myParagraph");
+        // if (myEl.classList.contains("redText")){
+        // 	myEl.classList.remove("redText");
+        // }else{
+        // myEl.classList.add("redText");
+        // }
+
+        // notify("This is my message", "warning");
+        // notifyModel("title", "<em>hello</em>", "success", "my text for the button");
+
+        attention.custom({msg: html,  title:" choose your dates"});
+        })
+    </script>
+
+
 {{end}}
