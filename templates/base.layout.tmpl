@@ -1,6 +1,7 @@
 {{define "base"}}
     <!doctype html>
 	<html lang="en">
+
 	<head>
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
@@ -24,236 +25,247 @@
 	</head>
 
 	<body>
-		<!--nav-->
-		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-			<a class="navbar-brand" href="#">ZhijiunY</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-			  <span class="navbar-toggler-icon"></span>
-			</button>
+	<!--nav-->
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+		<a class="navbar-brand" href="#">ZhijiunY</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav">
-					<li class="nav-item active">
-					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-					</li>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+				<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+				</li>
 
-					<li class="nav-item">
-					<a class="nav-link" href="/about">About</a>
-					</li>
+				<li class="nav-item">
+				<a class="nav-link" href="/about">About</a>
+				</li>
 
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Rooms</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="/generals">General's Quarters</a>
-						<a class="dropdown-item" href="/majors">Major's Suite</a>
-					</div>
-					</li>
+				<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Rooms</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="/generals">General's Quarters</a>
+					<a class="dropdown-item" href="/majors">Major's Suite</a>
+				</div>
+				</li>
 
-					<li class="nav-item">
-						<a class="nav-link" href="/search-availability">Book Now</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/contact">Contact</a>
-					</li>
-					
-				</ul>
-			</div>
-		</nav>
-        {{block "content" .}}
+				<li class="nav-item">
+					<a class="nav-link" href="/search-availability">Book Now</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/contact">Contact</a>
+				</li>
+				
+			</ul>
+		</div>
+	</nav>
+	{{block "content" .}}
 
-        {{end}}
+	{{end}}
     
-<!--footer-->
-<div class="row my-footer">
-    <div class="col text-center">
-        left
-    </div>
+	<!--footer-->
+	<footer class="my-footer">
+		<div class="row text-center">
+			<div class="col">
+				left
+			</div>
+			
+			<div class="col text-center">
+				Copyright © 2023 ZhijiunY. All rights reserved.
+			</div>
 
-    <div class="col text-center">
-        Copyright © 2023 ZhijiunY. All rights reserved.
-    </div>
-
-    <div class="col text-center">
-        right
-    </div> 
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" 
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
-		crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
-		crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" 
-		integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" 
-		crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/js/datepicker-full.min.js"></script>
-
-<script src="https://unpkg.com/notie"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-{{block "js" .}}
-
-{{end}}
+			<div class="col text-center">
+				right
+			</div>
+		</div> 
+	</footer>
 
 
-<script>
-	let attention = Prompt();
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" 
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+			crossorigin="anonymous"></script>
 
-	(function() {
-		'use strict';
-		window.addEventListener('load', function() {
-			// Fetch all the forms we want to apply custom Bootstrap validation styles to
-			let forms = document.getElementsByClassName('needs-validation');
-			// Loop over them and prevent submission
-			Array.prototype.filter.call(forms, function(form) {
-				form.addEventListener('submit', function(event) {
-					if (form.checkValidity() === false) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-					form.classList.add('was-validated');
-				}, false);
-			});
-		}, false);
-	})();
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
+			crossorigin="anonymous"></script>
 
-	// github.com/jaredreich/notie
-	function notify(msg, msgType){
-		notie.alert({
-			type: msgType, 
-			text: msg,
-		})
-	}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" 
+			integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" 
+			crossorigin="anonymous"></script>
 
-	// SweetAlert2
-	function notifyModel(title, text, icon, confirmButtonText){
-		Swal.fire({
-			title: title,
-			html: text,
-			icon: icon,
-			confirmButtonText: confirmButtonText,
-		})
-	}
+	<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/js/datepicker-full.min.js"></script>
 
-	function custom(c){
+	<script src="https://unpkg.com/notie"></script>
 
-	}
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	// Prompt function
-	function Prompt(){
-		let toast = function(c){
-			const{
-				msg="",
-				icon="success",
-				position="top-end",
-			} = c;
-			// console.log("Prom and toast")
+	{{block "js" .}}
 
-			const Toast = Swal.mixin({
-				toast: true,
-				title: msg,
-				position: position,
-				icon:icon,
-				showConfirmButton: false,
-				timer: 3000, 
-				timerProgressBar: true,
-				didOpen: (toast) => {
-					toast.addEventListener('mouseenter', Swal.stopTimer)
-					toast.addEventListener('mouseleave', Swal.resumeTimer)
-		}
+	{{end}}
 
-})
 
-		Toast.fire({})
-	}
+	<script>
+		let attention = Prompt();
 
-		let success = function(c){
+		(function() {
+			'use strict';
+			window.addEventListener('load', function() {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				let forms = document.getElementsByClassName('needs-validation');
+				// Loop over them and prevent submission
+				Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', function(event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
 
-			const{
-				msg = "",
-				title = "",
-				footer = "",
-			} = c;
-
-			Swal.fire({
-				icon: 'success',
-				title: title,
+		// github.com/jaredreich/notie
+		function notify(msg, msgType){
+			notie.alert({
+				type: msgType, 
 				text: msg,
-				footer: footer,
-			 })
-		}
-
-		let error = function(c){
-
-			const{
-				msg = "",
-				title = "",
-				footer = "",
-			} = c;
-
-			Swal.fire({
-				icon: 'error ',
-				title: title,
-				text: msg,
-				footer: footer,
 			})
 		}
 
-		async function custom(c){
-		const{
-			msg = "",
-			title = "",
-		} = c;
-
-		const { value: formValues } = await Swal.fire({
-			title: title,
-			html: msg,
-			backdrop: false,
-			focusConfirm: false,
-			showCancelButton: true,
-			willOpen: () => { 
-				const elem = document.getElementById('reservation-dates-modal');
-				const rp = new DateRangePicker(elem, {
-					format: 'yyyy-mm-dd',
-					showOnFocus: true, 
-				})
-			},
-			preConfirm: () => {
-				return [
-					document.getElementById('start').value,
-					document.getElementById('end').value
-				]
-			},
-			didOpen: () => {				
-					document.getElementById('start').removeAttribute('disabled');
-					document.getElementById('end').removeAttribute('disabled');
-			}
-		})
-
-if (formValues) {
-  Swal.fire(JSON.stringify(formValues))
-}
-	}
-
-		return {
-			toast: toast,
-			success: success,
-			error: error,
-			custom: custom,
+		// SweetAlert2
+		function notifyModel(title, text, icon, confirmButtonText){
+			Swal.fire({
+				title: title,
+				html: text,
+				icon: icon,
+				confirmButtonText: confirmButtonText,
+			})
 		}
-	}
 
-	
+		function custom(c){
+		}
 
-</script>
+		// Prompt function
+		function Prompt(){
+			let toast = function(c){
+				const{
+					msg="",
+					icon="success",
+					position="top-end",
+				} = c;
+				// console.log("Prom and toast")
+
+				const Toast = Swal.mixin({
+					toast: true,
+					title: msg,
+					position: position,
+					icon:icon,
+					showConfirmButton: false,
+					timer: 3000, 
+					timerProgressBar: true,
+					didOpen: (toast) => {
+						toast.addEventListener('mouseenter', Swal.stopTimer)
+						toast.addEventListener('mouseleave', Swal.resumeTimer)
+					}
+				})
+
+				Toast.fire({})
+			}
+
+			let success = function(c){
+
+				const{
+					msg = "",
+					title = "",
+					footer = "",
+				} = c;
+
+				Swal.fire({
+					icon: 'success',
+					title: title,
+					text: msg,
+					footer: footer,
+				})
+			}
+
+			let error = function(c){
+
+				const{
+					msg = "",
+					title = "",
+					footer = "",
+				} = c;
+
+				Swal.fire({
+					icon: 'error ',
+					title: title,
+					text: msg,
+					footer: footer,
+				})
+			}
+
+			async function custom(c){
+				const{
+					msg = "",
+					title = "",
+				} = c;
+
+				const { value: result} = await Swal.fire({
+					title: title,
+					html: msg,
+					backdrop: false,
+					focusConfirm: false,
+					showCancelButton: true,
+					willOpen: () => { 
+						const elem = document.getElementById('reservation-dates-modal');
+						const rp = new DateRangePicker(elem, {
+							format: 'yyyy-mm-dd',
+							showOnFocus: true, 
+						})
+					},
+					didOpen: () => {				
+						document.getElementById('start').removeAttribute('disabled');
+						document.getElementById('end').removeAttribute('disabled');
+					},
+					preConfirm: () => {
+						return [
+							document.getElementById('start').value,
+							document.getElementById('end').value
+						]
+					}
+					
+				})
+				if (result) {
+					if (result.dismiss !== Swal.DismissReason.cancel) {
+						if (result.value !== "") {
+							if (c.callback !== undefined) {
+								c.callback(result);
+							}
+						} else {
+							c.callback(false);
+						}		
+					} else {
+						c.callback(false);
+					}
+				}
+
+
+			}
+		
+
+			return {
+				toast: toast,
+				success: success,
+				error: error,
+				custom: custom,
+			}
+		}
+
+	</script>
 
 	</body>
 
-</html>
+	</html>
 {{end}}

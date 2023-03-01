@@ -37,41 +37,54 @@
 
 {{define "js"}}
 
-    <script>
-        document.getElementById("check-availability-button").addEventListener("click", function() {
+<script>
+    document.getElementById("check-availability-button").addEventListener("click", function() {
 
-        let html=`
-        <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-row" id="reservation-dates-modal">
-                        <div class="col">
-                            <input disabled required class="form-control" id="start" name="start" type="text" placeholder="Arrival">
-                        </div>
-
-                        <div class="col">
-                            <input disabled required class="form-control" id="end" name="end" type="text" placeholder="Departure">
-                        </div>
-
+    let html=`
+    <form id="check-availability-form" action="" method="post" novalidate class="needs-vaildation">
+        <div class="form-row">
+            <div class="col">
+                <div class="form-row" id="reservation-dates-modal">
+                    <div class="col">
+                        <input disabled required class="form-control" id="start" name="start" type="text" placeholder="Arrival">
                     </div>
+
+                    <div class="col">
+                        <input disabled required class="form-control" id="end" name="end" type="text" placeholder="Departure">
+                    </div>
+
                 </div>
-            </div>			
-        </form>
-        `
+            </div>
+        </div>			
+    </form>
+    `
 
-        // let myEl = document.getElementById("myParagraph");
-        // if (myEl.classList.contains("redText")){
-        // 	myEl.classList.remove("redText");
-        // }else{
-        // myEl.classList.add("redText");
-        // }
+    // let myEl = document.getElementById("myParagraph");
+    // if (myEl.classList.contains("redText")){
+    // 	myEl.classList.remove("redText");
+    // }else{
+    // myEl.classList.add("redText");
+    // }
 
-        // notify("This is my message", "warning");
-        // notifyModel("title", "<em>hello</em>", "success", "my text for the button");
+    // notify("This is my message", "warning");
+    // notifyModel("title", "<em>hello</em>", "success", "my text for the button");
 
-        attention.custom({msg: html,  title:" choose your dates"});
-        })
-    </script>
+        attention.custom({
+            msg: html,  
+            title:" choose your dates",
+            callback: function(result) {
+                console.log("called");
 
+                fetch('/search-availability-json')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        console.log(data.ok);
+                        console.log(data.message);
+                    })
+            } 
+        });
+    })
+</script>
 
 {{end}}
