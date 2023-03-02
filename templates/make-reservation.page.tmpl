@@ -4,31 +4,49 @@
 <div class="container">
 
     <div class="row">
-        <div class="col">
-
-            
+        <div class="col">           
             <h1>Make reservation</h1>
+            <p><strong>Reservition Details</strong>></p>
+
+            {{$res := index .Data "reservation"}}
 
             <form action="" method="POST" class="" novalidate >
-                <input type="text" name="csrf_token" value="{{.CSRFToken}}">
+                <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+
                 <div class="form-group mt-5">
-                    <label for="first-name">First Name: </label>
-                    <input type="text" name="first-name" id="first-name" class="form-control" required autocomplete="off">
+                    <label for="first_name">First Name: </label>
+                    {{with .Form.Errors.Get "first_name"}}
+                        <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control {{with .Form.Errors.Get "first_name"}} is-invalid {{end}}"
+                        type="text" name="first_name" value="{{$res.FirstName}}" id="first_name" required autocomplete="off">
                 </div>
 
                 <div class="form-group mt-5">
-                    <label for="last-name">Last Name: </label>
-                    <input type="text" name="last-name" id="last-name" class="form-control" required autocomplete="off">
+                    <label for="last_name">Last Name: </label>
+                    {{with .Form.Errors.Get "last_name"}}
+                        <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control {{with .Form.Errors.Get "last_name"}} is-invalid {{end}}" 
+                        type="text" name="last_name" id="last_name" value="{{$res.LastName}}" required autocomplete="off">
                 </div>
 
                 <div class="form-group mt-5">
                     <label for="email">Email Address: </label>
-                    <input type="text" name="email" id="email" class="form-control" required autocomplete="off">
+                    {{with .Form.Errors.Get "email_address"}}
+                        <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control {{with .Form.Errors.Get "email_address"}} is-invalid {{end}}" 
+                        type="text" name="email_address" id="email_address" value="{{$res.EmailAddress}}" required autocomplete="off">
                 </div>
 
                 <div class="form-group mt-5">
                     <label for="phone">Phone Number: </label>
-                    <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off">
+                    {{with .Form.Errors.Get "phone_number"}}
+                        <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control {{with .Form.Errors.Get "phone_number"}} is-invalid {{end}}"
+                        type="text" name="phone_number" id="phone_number" value="{{$res.PhoneNumber}}" required autocomplete="off">
                 </div>
 
                 <hr>

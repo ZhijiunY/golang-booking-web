@@ -63,14 +63,50 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the make a reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
+
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
 // PostReservation handles the posting of a reservation form
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
 
+	// grabbed data from whatever they entered in the field of the form
+	reservation := models.Reservation{
+		FirstName:    r.Form.Get("first_name"),
+		LastName:     r.Form.Get("last_name"),
+		EmailAddress: r.Form.Get("email_address"),
+		PhoneNumber:  r.Form.Get("phone_number"),
+	}
+
+	// check my form
+	form := forms.New(r.PostForm)
+
+	form.Required("first_name", "last_name", "email_address")
+	form.MinLength("first_name", 3, r)
+	form.IsEmail("email_address")
+
+	if !form.Valid() {
+		data := make(map[string]interface{})
+		data["reservation"] = reservation
+
+		// render the form
+		render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+		return
+	}
 }
 
 // Generals renders the room page
