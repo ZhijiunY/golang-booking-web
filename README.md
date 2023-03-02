@@ -7,4 +7,5 @@
 - Uses [notie](https://github.com/jaredreich/notie)
 - Uses [sweetalert2](https://sweetalert2.github.io)
 - Uses [Vanilla JS Datepicker](https://mymth.github.io/vanillajs-datepicker/)
+- Uses [GoValidator](https://github.com/asaskevich/govalidator)
 - See [Javascript Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
