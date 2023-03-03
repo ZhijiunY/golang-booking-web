@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-	"testing"
 	"time"
 
 	"github.com/ZhijiunY/booking-web/cmd/internal/config"
@@ -20,14 +19,15 @@ import (
 )
 
 var (
-	app config.AppConfig
-	session *scs.SessionManager
+	app             config.AppConfig
+	session         *scs.SessionManager
 	pathToTemplates = "./../../templates"
-	functions = template.FuncMap{}
+	functions       = template.FuncMap{}
 )
+
 // from main.go file
 func getRoutes() http.Handler {
-// what am I going to put in the session
+	// what am I going to put in the session
 	// reservation-summary
 	gob.Register(models.Reservation{})
 
@@ -43,7 +43,7 @@ func getRoutes() http.Handler {
 
 	app.Session = session
 
-	tc, err := render.CreateTemplateCache()
+	tc, err := CreateTestTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
 	}
@@ -55,7 +55,6 @@ func getRoutes() http.Handler {
 	NewHandlers(repo)
 
 	render.NewTemplates(&app)
-
 
 	// from routes.go file
 	mux := chi.NewRouter()
@@ -111,7 +110,7 @@ func SessionLoad(next http.Handler) http.Handler {
 
 // from render.go file
 // CreateTestTemplateCache creates a template cache as a map
-func CreateTestTemplateCache(t *testing.T) (map[string]*template.Template, error) {
+func CreateTestTemplateCache() (map[string]*template.Template, error) {
 
 	myCache := map[string]*template.Template{}
 
@@ -133,7 +132,7 @@ func CreateTestTemplateCache(t *testing.T) (map[string]*template.Template, error
 		}
 
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl",pathToTemplates))
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl", pathToTemplates))
 			if err != nil {
 				return myCache, err
 			}
