@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ZhijiunY/booking-web/cmd/internal/config"
-	"github.com/ZhijiunY/booking-web/cmd/internal/handlers"
-	"github.com/ZhijiunY/booking-web/cmd/internal/models"
-	"github.com/ZhijiunY/booking-web/cmd/internal/render"
+	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/handlers"
+	"github.com/ZhijiunY/booking-web/internal/models"
+	"github.com/ZhijiunY/booking-web/internal/render"
 	"github.com/alexedwards/scs/v2"
 )
 

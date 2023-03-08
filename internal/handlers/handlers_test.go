@@ -19,10 +19,17 @@ var theTests = []struct {
 	expectedStatusCode int
 }{
 	{"home", "/", "GET", []postData{}, http.StatusOK},
+	// {"about", "/about", "GET", []postData{}, http.StatusOK},
+	// {"generals", "/generals", "GET", []postData{}, http.StatusOK},
+	// {"majors", "/majors", "GET", []postData{}, http.StatusOK},
+	// {"search-availability", "/search-availability", "GET", []postData{}, http.StatusOK},
+	// {"contact", "/contact", "GET", []postData{}, http.StatusOK},
+	// {"make-res", "/reservation", "GET", []postData{}, http.StatusOK},
 }
 
 func TestHandlers(t *testing.T) {
 	routes := getRoutes()
+
 	ts := httptest.NewTLSServer(routes)
 	defer ts.Close()
 
@@ -35,7 +42,7 @@ func TestHandlers(t *testing.T) {
 			}
 
 			if resp.StatusCode != e.expectedStatusCode {
-				t.Errorf("for %s, expected %d but got %d", e.name, e.expectedStatusCode, resp.StatusCode)
+				t.Errorf("for %s expected %d but got %d", e.name, e.expectedStatusCode, resp.StatusCode)
 			}
 		} else {
 

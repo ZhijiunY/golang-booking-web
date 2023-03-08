@@ -8,15 +8,15 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/ZhijiunY/booking-web/cmd/internal/config"
-	"github.com/ZhijiunY/booking-web/cmd/internal/models"
+	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/models"
 	"github.com/justinas/nosurf"
 )
 
 var (
-	// "undefined app = a" is most likely due to the variable "app" not being defined in the package-level scope.
-	app       *config.AppConfig
 	functions = template.FuncMap{}
+	// "undefined app = a" is most likely due to the variable "app" not being defined in the package-level scope.
+	app *config.AppConfig
 	// test setup
 	pathToTemplates = "./templates"
 )
@@ -75,7 +75,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 
 	myCache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl)", pathToTemplates))
+	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl", pathToTemplates))
 	if err != nil {
 		return myCache, err
 	}
@@ -93,7 +93,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		}
 
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl",pathToTemplates))
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl", pathToTemplates))
 			if err != nil {
 				return myCache, err
 			}

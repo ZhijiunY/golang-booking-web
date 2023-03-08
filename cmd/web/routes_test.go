@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ZhijiunY/booking-web/cmd/internal/config"
-	"github.com/go-chi/chi"
+	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/go-chi/chi/v5"
+	// version can impact the test results
 )
 
 func TestRoutes(t *testing.T) {
@@ -20,7 +21,6 @@ func TestRoutes(t *testing.T) {
 		t.Error(fmt.Sprintf("type is not *chi.Mux, but is %T", v))
 	}
 }
-
 
 // func TestRoutes(t *testing.T) {
 // 	var app config.AppConfig

@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/ZhijiunY/booking-web/cmd/internal/config"
-	"github.com/ZhijiunY/booking-web/cmd/internal/handlers"
+	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )

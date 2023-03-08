@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ZhijiunY/booking-web/cmd/internal/config"
-	"github.com/ZhijiunY/booking-web/cmd/internal/forms"
-	"github.com/ZhijiunY/booking-web/cmd/internal/models"
-	"github.com/ZhijiunY/booking-web/cmd/internal/render"
+	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/forms"
+	"github.com/ZhijiunY/booking-web/internal/models"
+	"github.com/ZhijiunY/booking-web/internal/render"
 )
 
 // Repo the repository used by the handlers

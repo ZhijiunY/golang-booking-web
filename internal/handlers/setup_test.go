@@ -9,12 +9,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ZhijiunY/booking-web/cmd/internal/config"
-	"github.com/ZhijiunY/booking-web/cmd/internal/models"
-	"github.com/ZhijiunY/booking-web/cmd/internal/render"
+	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/models"
+	"github.com/ZhijiunY/booking-web/internal/render"
 	"github.com/alexedwards/scs/v2"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/justinas/nosurf"
 )
 
@@ -43,7 +43,7 @@ func getRoutes() http.Handler {
 
 	app.Session = session
 
-	tc, err := CreateTestTemplateCache()
+	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
 	}
