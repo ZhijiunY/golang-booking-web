@@ -43,7 +43,7 @@ func getRoutes() http.Handler {
 
 	app.Session = session
 
-	tc, err := render.CreateTemplateCache()
+	tc, err := CreateTestTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
 	}
