@@ -19,12 +19,12 @@ var theTests = []struct {
 	expectedStatusCode int
 }{
 	{"home", "/", "GET", []postData{}, http.StatusOK},
-	// {"about", "/about", "GET", []postData{}, http.StatusOK},
-	// {"generals", "/generals", "GET", []postData{}, http.StatusOK},
-	// {"majors", "/majors", "GET", []postData{}, http.StatusOK},
-	// {"search-availability", "/search-availability", "GET", []postData{}, http.StatusOK},
-	// {"contact", "/contact", "GET", []postData{}, http.StatusOK},
-	// {"make-res", "/reservation", "GET", []postData{}, http.StatusOK},
+	{"about", "/about", "GET", []postData{}, http.StatusOK},
+	{"generals", "/generals", "GET", []postData{}, http.StatusOK},
+	{"majors", "/majors", "GET", []postData{}, http.StatusOK},
+	{"search-availability", "/search-availability", "GET", []postData{}, http.StatusOK},
+	{"contact", "/contact", "GET", []postData{}, http.StatusOK},
+	{"make-res", "/reservation", "GET", []postData{}, http.StatusOK},
 }
 
 func TestHandlers(t *testing.T) {
