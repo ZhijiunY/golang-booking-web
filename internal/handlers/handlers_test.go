@@ -24,7 +24,7 @@ var theTests = []struct {
 	{"majors", "/majors", "GET", []postData{}, http.StatusOK},
 	{"search-availability", "/search-availability", "GET", []postData{}, http.StatusOK},
 	{"contact", "/contact", "GET", []postData{}, http.StatusOK},
-	{"make-res", "/reservation", "GET", []postData{}, http.StatusOK},
+	{"make-res", "/make-reservation", "GET", []postData{}, http.StatusOK},
 }
 
 func TestHandlers(t *testing.T) {
@@ -37,8 +37,7 @@ func TestHandlers(t *testing.T) {
 		if e.method == "GET" {
 			resp, err := ts.Client().Get(ts.URL + e.url)
 			if err != nil {
-				t.Log(err)
-				t.Fatal(err)
+				t.Fatal("Failed:", e.name, err)
 			}
 
 			if resp.StatusCode != e.expectedStatusCode {
