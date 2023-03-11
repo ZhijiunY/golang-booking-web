@@ -77,8 +77,8 @@ func getRoutes() http.Handler {
 
 	mux.Get("/contact", Repo.Contact)
 
-	mux.Get("/reservation", Repo.Reservation)
-	mux.Post("/reservation", Repo.PostReservation)
+	mux.Get("/make-reservation", Repo.Reservation)
+	mux.Post("/make-reservation", Repo.PostReservation)
 	mux.Get("/reservation-summary", Repo.ReservationSummary)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
@@ -114,7 +114,7 @@ func CreateTestTemplateCache() (map[string]*template.Template, error) {
 
 	myCache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl)", pathToTemplates))
+	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl", pathToTemplates))
 	if err != nil {
 		return myCache, err
 	}

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/ZhijiunY/booking-web/internal/config"
@@ -21,6 +22,9 @@ var session *scs.SessionManager
 
 // main is the main function
 func main() {
+
+	os.Setenv("PG_DUMP_PATH", "/usr/bin/pg_dump")
+
 	err := run()
 	if err != nil {
 		log.Fatal(err)
