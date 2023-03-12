@@ -3,3 +3,4 @@ coverage.out
 golang-booking-web
 run.sh
 .DS_Store
+database.yml
