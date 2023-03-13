@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/driver"
 	"github.com/ZhijiunY/booking-web/internal/handlers"
 	"github.com/ZhijiunY/booking-web/internal/models"
 	"github.com/ZhijiunY/booking-web/internal/render"
@@ -25,10 +26,11 @@ func main() {
 
 	os.Setenv("PG_DUMP_PATH", "/usr/bin/pg_dump")
 
-	err := run()
+	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.SQL.Close()
 
 	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
 	// _ = http.ListenAndServe(portNumber, nil)
@@ -44,7 +46,7 @@ func main() {
 	}
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 	// what am I going to put in the session
 	// reservation-summary
 	gob.Register(models.Reservation{})
@@ -61,10 +63,19 @@ func run() error {
 
 	app.Session = session
 
+	// connect to database
+	log.Println("Connecting to database...")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=tcs password=")
+	if err != nil {
+		log.Fatal("Cannot connect to database! Dying...")
+	}
+
+	log.Println("Connected to database!")
+
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
-		return err
+		return nil, err
 	}
 
 	app.TemplateCache = tc
@@ -72,8 +83,7 @@ func run() error {
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
 
-	return nil
+	return db, nil
 }
