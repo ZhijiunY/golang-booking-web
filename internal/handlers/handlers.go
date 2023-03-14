@@ -1,13 +1,14 @@
 package handlers
 
 import (
-	"database/sql/driver"
+	// "database/sql/driver"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/ZhijiunY/booking-web/internal/config"
+	"github.com/ZhijiunY/booking-web/internal/driver"
 	"github.com/ZhijiunY/booking-web/internal/forms"
 	"github.com/ZhijiunY/booking-web/internal/models"
 	"github.com/ZhijiunY/booking-web/internal/render"
@@ -88,18 +89,18 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 
 	// grabbed data from whatever they entered in the field of the form
 	reservation := models.Reservation{
-		FirstName:    r.Form.Get("first_name"),
-		LastName:     r.Form.Get("last_name"),
-		EmailAddress: r.Form.Get("email_address"),
-		PhoneNumber:  r.Form.Get("phone_number"),
+		FirstName: r.Form.Get("first_name"),
+		LastName:  r.Form.Get("last_name"),
+		Email:     r.Form.Get("email"),
+		Phone:     r.Form.Get("phone"),
 	}
 
 	// check my form
 	form := forms.New(r.PostForm)
 
-	form.Required("first_name", "last_name", "email_address")
+	form.Required("first_name", "last_name", "email")
 	form.MinLength("first_name", 3, r)
-	form.IsEmail("email_address")
+	form.IsEmail("email")
 
 	if !form.Valid() {
 		data := make(map[string]interface{})

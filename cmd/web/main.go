@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/ZhijiunY/booking-web/internal/config"
@@ -24,7 +23,7 @@ var session *scs.SessionManager
 // main is the main function
 func main() {
 
-	os.Setenv("PG_DUMP_PATH", "/usr/bin/pg_dump")
+	// os.Setenv("PG_DUMP_PATH", "/usr/bin/pg_dump")
 
 	db, err := run()
 	if err != nil {
@@ -65,7 +64,7 @@ func run() (*driver.DB, error) {
 
 	// connect to database
 	log.Println("Connecting to database...")
-	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=tcs password=")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=postgres password=")
 	if err != nil {
 		log.Fatal("Cannot connect to database! Dying...")
 	}
@@ -81,7 +80,7 @@ func run() (*driver.DB, error) {
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	repo := handlers.NewRepo(&app)
+	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
 
