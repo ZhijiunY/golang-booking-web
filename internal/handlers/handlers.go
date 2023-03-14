@@ -6,12 +6,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/ZhijiunY/booking-web/internal/config"
 	"github.com/ZhijiunY/booking-web/internal/driver"
 	"github.com/ZhijiunY/booking-web/internal/forms"
+	"github.com/ZhijiunY/booking-web/internal/helpers"
 	"github.com/ZhijiunY/booking-web/internal/models"
 	"github.com/ZhijiunY/booking-web/internal/render"
+
 	"github.com/ZhijiunY/booking-web/internal/repository"
 	"github.com/ZhijiunY/booking-web/internal/repository/dbrepo"
 )
@@ -87,12 +91,37 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	sd := r.Form.Get("start_date")
+	ed := r.Form.Get("end_date")
+
+	// 01/02 03:04:05PM '06 -0700
+
+	layout := "2006-01-02"
+	startDate, err := time.Parse(layout, sd)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
+	endDate, err := time.Parse(layout, ed)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
+	roomID, err := strconv.Atoi(r.Form.Get("room_id"))
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
 	// grabbed data from whatever they entered in the field of the form
 	reservation := models.Reservation{
 		FirstName: r.Form.Get("first_name"),
 		LastName:  r.Form.Get("last_name"),
 		Email:     r.Form.Get("email"),
 		Phone:     r.Form.Get("phone"),
+		StartDate: startDate,
+		EndDate:   endDate,
+		RoomID:    roomID,
 	}
 
 	// check my form
@@ -111,6 +140,26 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 			Form: form,
 			Data: data,
 		})
+		return
+	}
+
+	newReservationID, err := m.DB.InsertReservation(reservation)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	restriction := models.RoomRestriction{
+		StartDate:      startDate,
+		EndDate:        endDate,
+		RoomID:         roomID,
+		ReservationID:  newReservationID,
+		RestrictionsID: 1,
+	}
+
+	err = m.DB.InsertRoomRestriction(restriction)
+	if err != nil {
+		helpers.ServerError(w, err)
 		return
 	}
 
