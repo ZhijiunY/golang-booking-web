@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/ZhijiunY/booking-web/internal/config"
 	"github.com/ZhijiunY/booking-web/internal/driver"
 	"github.com/ZhijiunY/booking-web/internal/handlers"
+	"github.com/ZhijiunY/booking-web/internal/helpers"
 	"github.com/ZhijiunY/booking-web/internal/models"
 	"github.com/ZhijiunY/booking-web/internal/render"
 	"github.com/alexedwards/scs/v2"
@@ -17,8 +19,12 @@ import (
 
 const portNumber = ":8080"
 
-var app config.AppConfig
-var session *scs.SessionManager
+var (
+	app      config.AppConfig
+	session  *scs.SessionManager
+	infoLog  *log.Logger
+	errorLog *log.Logger
+)
 
 // main is the main function
 func main() {
@@ -56,6 +62,12 @@ func run() (*driver.DB, error) {
 	// Change this to true when in production
 	app.InProduction = false
 
+	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
+
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	// cookie persist after the browser window is closed by the end user
@@ -86,6 +98,7 @@ func run() (*driver.DB, error) {
 	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
 	render.NewRenderer(&app)
+	helpers.NewHelpers(&app)
 
 	return db, nil
 }
