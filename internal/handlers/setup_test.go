@@ -63,7 +63,7 @@ func getRoutes() http.Handler {
 	mux.Use(middleware.Recoverer)
 
 	// go get "github.com/justinas/nosurf"
-	mux.Use(NoSurf)
+	// mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
 	mux.Get("/", Repo.Home)
