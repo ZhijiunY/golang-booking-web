@@ -1,10 +1,16 @@
 package repository
 
-import "github.com/ZhijiunY/booking-web/internal/models"
+import (
+	"time"
+
+	"github.com/ZhijiunY/booking-web/internal/models"
+)
 
 type DatabaseRepo interface {
 	AllUsers() bool
 
 	InsertReservation(res models.Reservation) (int, error)
 	InsertRoomRestriction(r models.RoomRestriction) error
+	SearchAvailabilityByDatesByRoomID(start, end time.Time, roomID int) (bool, error)
+	SearchAvailabilityForAllRooms(start, end time.Time) ([]models.Room, error)
 }
